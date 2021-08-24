@@ -1,0 +1,10 @@
+services:
+  cli:
+    image: ghcr.io/azuracast/testing:latest
+    volumes:
+      - ./:/app
+      - composer_data:/tmp
+    command: composer test
+
+volumes:
+  composer_data: {}
