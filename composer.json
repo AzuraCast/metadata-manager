@@ -3,6 +3,7 @@
     "description": "A command-line wrapper around the PHP GetId3 library.",
     "require": {
         "php": ">=7.4",
+        "ext-json": "*",
         "symfony/console": ">5.0",
         "james-heinrich/getid3": "dev-master#0bc9aca",
         "voku/portable-utf8": "^5.4"

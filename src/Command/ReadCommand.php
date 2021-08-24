@@ -99,7 +99,7 @@ class ReadCommand extends Command
                         $tagValue = implode(', ', $flatValue);
                     }
 
-                    $metaTags[$tagName] = $this->cleanUpString((string)$tagValue);
+                    $metaTags[(string)$tagName] = $this->cleanUpString((string)$tagValue);
                 }
             }
         }
