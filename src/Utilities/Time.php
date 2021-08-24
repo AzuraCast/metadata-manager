@@ -6,7 +6,12 @@ namespace Azura\MetadataManager\Utilities;
 
 class Time
 {
-    public static function displayTimeToSeconds(string|float|int $seconds = null): ?float
+    /**
+     * @param string|float|int|null $seconds
+     *
+     * @return float|null
+     */
+    public static function displayTimeToSeconds($seconds = null): ?float
     {
         if (null === $seconds || '' === $seconds) {
             return null;

@@ -29,7 +29,7 @@ class Arrays
      *
      * @return mixed[]
      */
-    public static function flattenArray(object|array $array, string $separator = '.', ?string $prefix = null): array
+    public static function flattenArray($array, string $separator = '.', ?string $prefix = null): array
     {
         if (is_object($array)) {
             // Quick and dirty conversion from object to array.
