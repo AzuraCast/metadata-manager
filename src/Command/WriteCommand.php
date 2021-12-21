@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Azura\MetadataManager\Command;
 
 use Azura\MetadataManager\Metadata;
-use getID3;
-use getid3_writetags;
+use JamesHeinrich\GetID3\GetID3;
+use JamesHeinrich\GetID3\WriteTags;
 use JsonException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -40,10 +40,10 @@ class WriteCommand extends Command
         $jsonInput = $input->getArgument('json-input');
         $artInput = $input->getArgument('art-input');
 
-        $getID3 = new getID3();
+        $getID3 = new GetID3();
         $getID3->setOption(['encoding' => 'UTF8']);
 
-        $tagwriter = new getid3_writetags();
+        $tagwriter = new WriteTags();
         $tagwriter->filename = $path;
 
         $pathExt = strtolower(pathinfo($path, PATHINFO_EXTENSION));

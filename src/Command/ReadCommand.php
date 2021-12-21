@@ -7,6 +7,7 @@ namespace Azura\MetadataManager\Command;
 use Azura\MetadataManager\Metadata;
 use Azura\MetadataManager\Utilities\Arrays;
 use Azura\MetadataManager\Utilities\Time;
+use JamesHeinrich\GetID3\GetID3;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,7 +48,7 @@ class ReadCommand extends Command
             return 1;
         }
 
-        $id3 = new \getID3();
+        $id3 = new GetID3();
 
         $id3->option_md5_data = true;
         $id3->option_md5_data_source = true;
