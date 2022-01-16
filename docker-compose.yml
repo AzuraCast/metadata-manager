@@ -1,6 +1,6 @@
 services:
   cli:
-    image: ghcr.io/azuracast/testing:latest
+    image: ghcr.io/azuracast/testing:8.1.0
     volumes:
       - ./:/app
       - composer_data:/tmp
