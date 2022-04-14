@@ -6,7 +6,8 @@
         "ext-json": "*",
         "symfony/console": ">5.0",
         "james-heinrich/getid3": "v2.0.0-beta4",
-        "voku/portable-utf8": "^6"
+        "voku/portable-utf8": "^6",
+        "php-ffmpeg/php-ffmpeg": "^1.0"
     },
     "require-dev": {
         "php-parallel-lint/php-console-highlighter": "^1",
