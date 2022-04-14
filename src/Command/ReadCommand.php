@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Azura\MetadataManager\Command;
 
-use Azura\MetadataManager\Exception\ReadException;
 use Azura\MetadataManager\Reader\FfmpegReader;
 use Azura\MetadataManager\Reader\GetId3Reader;
 use Symfony\Component\Console\Command\Command;
