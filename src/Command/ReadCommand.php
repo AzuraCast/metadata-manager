@@ -6,6 +6,7 @@ namespace Azura\MetadataManager\Command;
 
 use Azura\MetadataManager\Reader\FfmpegReader;
 use Azura\MetadataManager\Reader\GetId3Reader;
+use Azura\MetadataManager\Reader\ReaderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,30 +45,23 @@ class ReadCommand extends Command
             return 1;
         }
 
-        try {
-            if (!$this->tryReadWithGetId3Reader($path, $jsonOutput, $artOutput)) {
-                FfmpegReader::read($path, $jsonOutput, $artOutput);
+        /**
+         * @var ReaderInterface[] Readers to try, by priority.
+         */
+        $metadataReaders = [
+            GetId3Reader::class,
+            FfmpegReader::class
+        ];
+
+        foreach($metadataReaders as $metadataReader) {
+            try {
+                $metadataReader::read($path, $jsonOutput, $artOutput);
+                return 0;
+            } catch (Throwable $exception) {
+                $io->error($exception->getMessage());
             }
-        } catch (Throwable $exception) {
-            $io->error($exception->getMessage());
-            return 1;
         }
 
-        return 0;
-    }
-
-    protected function tryReadWithGetId3Reader(
-        string $path,
-        string $jsonOutput,
-        ?string $artOutput
-    ): bool {
-        try {
-            GetId3Reader::read($path, $jsonOutput, $artOutput);
-
-            return true;
-        }
-        catch (Throwable) {
-            return false;
-        }
+        return 1;
     }
 }
