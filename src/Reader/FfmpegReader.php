@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Azura\MetadataManager\Reader;
 
 use Azura\MetadataManager\Metadata;
+use Azura\MetadataManager\Utilities\Arrays;
 use Azura\MetadataManager\Utilities\Time;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
@@ -69,5 +70,34 @@ class FfmpegReader extends AbstractReader
                 break;
             }
         }
+    }
+
+    protected static function aggregateMetaTags(array $toProcess): array
+    {
+        $metaTags = [];
+
+        foreach ($toProcess as $tagSet) {
+            if (empty($tagSet)) {
+                continue;
+            }
+
+            foreach ($tagSet as $tagName => $tagContents) {
+                if (!empty($tagContents) && !isset($metaTags[$tagName])) {
+                    $tagValue = $tagContents;
+                    if (is_array($tagValue)) {
+                        // Skip pictures
+                        if (isset($tagValue['data'])) {
+                            continue;
+                        }
+                        $flatValue = Arrays::flattenArray($tagValue);
+                        $tagValue = implode(', ', $flatValue);
+                    }
+
+                    $metaTags[(string)$tagName] = self::cleanUpString((string)$tagValue);
+                }
+            }
+        }
+
+        return $metaTags;
     }
 }
