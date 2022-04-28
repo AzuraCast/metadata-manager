@@ -41,8 +41,6 @@ class FfmpegReader extends AbstractReader
 
         $metaTags = self::aggregateMetaTags($toProcess);
 
-        file_put_contents(__DIR__ . '/test1.json', json_encode($metaTags, JSON_PRETTY_PRINT));
-
         $metadata->setTags($metaTags);
         $metadata->setMimeType(mime_content_type($path) ?: '');
 
